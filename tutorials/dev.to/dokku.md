@@ -283,7 +283,7 @@ Look at the **first step** of [this guide](https://www.digitalocean.com/communit
 
 ### Docker ports
 
-For a reason that I do not understand, Docker ports are open by the default on the firewall, we should shut them, as it can be a security concern.
+Docker ports are open by the default on the firewall, we should shut them, as it can be a security concern.
 
 ```sh
 sudo ufw status # Optional, check the current rules on the firewall
@@ -295,7 +295,7 @@ sudo ufw delete allow 2376/tcp
 sudo ufw status # Optional, check that Docker's ports are deleted
 ```
 
-UFW is Ubuntu's firewall manager, [learn more](https://wiki.ubuntu.com/UncomplicatedFirewall)
+UFW is Ubuntu's firewall manager, [learn more](https://wiki.ubuntu.com/UncomplicatedFirewall).
 
 ### Fail2Ban
 
