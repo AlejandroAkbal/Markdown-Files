@@ -1,0 +1,540 @@
+<!--
+Title: Create your own Heroku with Dokku on DigitalOcean
+Tags: heroku, docker, devops, tutorial
+ -->
+
+# Introduction
+
+So, you want to have your own infrastructure while having the best commodities to push your code to production, right?
+
+Then you have found your guide. We will go through every single thing that you will need.
+
+**We will set up a server on DigitalOcean, configure your application for usage with Dokku, learn how to push your code directly to production and finalize the guide by adding TLS/SSL to your application.**
+
+The best thing? This is all free. (\*)
+
+> (\*) _If you are a new user on DigitalOcean and register through a [referral link](#requirements-info)_.
+
+---
+
+## 0. Before we start
+
+### What is Dokku
+
+You might be wondering what Dokku is.
+
+> [Dokku](https://github.com/dokku/dokku) is a docker-powered **Platform-as-a-Service** (PaaS) that helps you build and manage the lifecycle of applications.
+
+This means that it shares many similarities with Heroku, so if you have used Heroku before, this will come to you as familiar. For example, you can **push code to deploy**, use buildpacks, scale processes, etc
+
+### Preface
+
+For this guide I will be using Windows 10 with the `Git Bash` terminal, but everything should be the same on any GNU/Linux system.
+
+The server will be a DigitalOcean's Ubuntu 20.04 image with Dokku already set up.
+
+As an example application we will use this [NodeJS getting started project](https://github.com/heroku/node-js-getting-started) by Heroku.
+
+### Requirements
+
+- A DigitalOcean account
+- A Domain
+- A Terminal
+- A SSH key pair
+
+### Requirements info
+
+If you don't have a DigitalOcean account, you should create one, its free! And if you use my [referral link](https://m.do.co/c/89d935019679) you will receive \$100 as credit for free!
+
+If you don't have a SSH Key pair, then [follow this tutorial](https://www.digitalocean.com/docs/droplets/how-to/add-ssh-keys/) to learn how to generate and add them to your DigitalOcean account.
+
+---
+
+## 1. Droplet creation
+
+This might be the easiest step, as DigitalOcean offers a [Ubuntu 20.04 image with Dokku already set up](https://do.co/3nzKhrp), just follow that link and create a droplet.
+
+Then just choose whatever options meet your needs.
+
+> ⚠ You should choose a Datacenter that is near you or your clients. ⚠
+
+![Datacenter Region](https://dev-to-uploads.s3.amazonaws.com/i/1mdln5aicjyzlguc7yuq.PNG)
+
+Once it's created, go to the "Networking" tab of your new droplet and assign a floating IP.
+
+![Floating IP](https://dev-to-uploads.s3.amazonaws.com/i/8r8zri2yq1lyvs57skak.PNG)
+
+Visit that IP on your browser and you'll find the Dokku set up.
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/alo111qcfqd3rbjw0e0m.PNG)
+
+Just fill the details with your public SSH Key and the domain you will be using. I recommend enabling `virtualhost naming`, as its easier and more common than using ports.
+
+> Tip: If you had added the public SSH Key to your DigitalOcean before, the `Public SSH Key` form should have been filled automagically!
+
+For the sake of this guide, I will be using the subdomain `dokku` on my own domain, [akbal.dev](https://akbal.dev).
+
+---
+
+## 2. Domain management
+
+My current domain manager is CloudFlare, but you can use any other domain registrar or manager, the instructions should be the same. 😊
+
+### DNS records
+
+We have to configure our DNS settings to point to our new droplet's floating IP.
+
+Start by adding a **`A`** type record with the hostname and floating IP you assigned earlier in the Dokku set up.
+
+![CloudFlare A record](https://dev-to-uploads.s3.amazonaws.com/i/af7brirn5r9bv1pwq0i3.PNG)
+
+You should also add a **catch-all** rule so anything you deploy on a subdomain is automatically forwarded to the droplet.
+
+![CloudFlare A catch-all rule](https://dev-to-uploads.s3.amazonaws.com/i/bk71sau6852rtprtkkud.PNG)
+
+> _If you're using CloudFlare and have trouble connecting in the next steps, try to set the DNS record proxy to `DNS only` instead of `Proxied`, as it seems to cause trouble._
+
+---
+
+## 3. Local configuration
+
+Before we start, we should configure some things on our end.
+
+> 💻 These steps are done on our **local machine**.
+
+### Add SSH Key
+
+We have to add our Private SSH Key to our local terminal so we can authenticate and connect to the droplet.
+
+```sh
+eval `ssh-agent -s` # Start the agent that holds on to our keys
+ssh-add '~/path/to/ssh/private.key' # Add our private SSH key
+```
+
+> ⚠ This is an important step, if you don't add the private SSH key to the terminal, you won't be able to push code to Dokku later!
+
+We should check that the key was added successfully. If the output is empty, the key was _not_ added.
+
+```sh
+ssh-add -l
+```
+
+Then lets try to connect to our droplet via SSH as the root user.
+
+```sh
+ssh root@<domain>
+
+# E.g.
+ssh root@dokku.akbal.dev
+```
+
+Voilà, **we are in**!
+
+![SSH Connection](https://dev-to-uploads.s3.amazonaws.com/i/yf40wqhzhyi0fb7jv3l0.PNG)
+
+---
+
+## 4. Application set up
+
+We will need an application to run on Dokku, don't we?
+
+> 💻 These steps are done on our **local machine**.
+
+### Clone repository
+
+Lets clone the [example application](#preface).
+
+```sh
+git clone https://github.com/heroku/node-js-getting-started.git
+
+cd node-js-getting-started
+```
+
+Notice that there is a file that you should be familiar with if you have used Heroku before, the `Procfile`. We will be talking about it in the next step.
+
+### Getting familiar
+
+Now that we have cloned the repository we can install the dependencies and play with the application if we want to.
+
+```sh
+npm install # Install dependencies
+
+npm run start # Start the application
+```
+
+Now if we visit `http://localhost:5000` on our browser we should see the application running.
+
+![Heroku's node-js-getting-started project](https://dev-to-uploads.s3.amazonaws.com/i/hcc5nd1oruamwlslvypq.png)
+
+---
+
+## 5. Application configuration
+
+We should configure our application so Dokku is able to run it.
+
+_You can **skip this step if you are using the [example application](#preface)**, since it already has been configured._
+
+> 💻 These steps are done on our **local machine**.
+
+### Buildpacks trivia
+
+Dokku uses Heroku's own Buildpacks to build your applications and detect what language it is using.
+
+In this guide we are using a [NodeJS application](#preface), so Dokku will detect and use Heroku's NodeJS Buildpack.
+
+[Learn more about the NodeJS buildpack.](https://devcenter.heroku.com/articles/nodejs-support)
+
+### Procfile
+
+Dokku needs a `Procfile` to identify what `process types` and commands our application uses, _for example_, to start a web server.
+
+You should create this file if you haven't. A common NodeJS `Procfile` looks like this:
+
+```sh
+web: node index.js
+
+# Or like this
+web: npm run start
+```
+
+[Learn more about the `Procfile` and `process types.`](https://devcenter.heroku.com/articles/procfile)
+
+### Node version
+
+Dokku will download and use the NodeJS version specified in the `engines` section of our `package.json`.
+
+```json
+// ...
+"engines": {
+    "node": "12.x"
+  },
+```
+
+You should add this part, otherwise Dokku will chose a version of NodeJS that might or might not work with your application.
+
+### Further configuration
+
+You should check out the [Buildpack documentation](https://devcenter.heroku.com/articles/buildpacks) of the language you're using to further configure things!
+
+---
+
+## 6. Server configuration
+
+Now that we can connect to the droplet and have set up our application, lets configure the server a bit.
+
+> 🖥 These steps are done on the **Dokku droplet**.
+
+### RAM Swap
+
+Chances are that you will be using Dokku on a low memory (<2GB) droplet.
+
+To fix possible failures due to low memory, we should create a bigger [swap file](https://techterms.com/definition/swap_file). Read [this tutorial](http://dokku.viewdocs.io/dokku/getting-started/advanced-installation/#vms-with-less-than-1-gb-of-memory) to learn how to do so.
+
+---
+
+## 7. Server security
+
+While securing a server is not an easy task, the following instructions will take care of the most common problems.
+
+> 🖥 These steps are done on the **Dokku droplet**.
+
+### Root user
+
+We have been using the `root` user, but it is a **security risk**. We shouldn't be using it for everything, we should use instead our own user with `root` **privileges**.
+
+Follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-create-a-new-sudo-enabled-user-on-ubuntu-20-04-quickstart) to learn how to create a new user with sudo privileges.
+
+Once you have done that, we should copy the Public SSH Key from the `root` user to our own user.
+
+```sh
+USER=<user> # Set the user variable
+mkdir -p /home/$USER/.ssh # Create ssh directory
+chmod 700 /home/$USER/.ssh # Apply directory permissions
+cp /root/.ssh/authorized_keys /home/$USER/.ssh/authorized_keys # Copy the ssh authorized key
+chown -R $USER:$USER /home/$USER/.ssh # Apply user and group permissions
+sudo chmod 600 /home/$USER/.ssh/authorized_keys # Apply file permissions
+
+
+# As a one-liner
+USER=<user>; mkdir -p /home/$USER/.ssh && chmod 700 /home/$USER/.ssh && cp /root/.ssh/authorized_keys /home/$USER/.ssh/authorized_keys && chown -R $USER:$USER /home/$USER/.ssh && sudo chmod 600 /home/$USER/.ssh/authorized_keys
+
+# E.g.
+USER=alejandro; mkdir -p /home/$USER/.ssh && chmod 700 /home/$USER/.ssh && cp /root/.ssh/authorized_keys /home/$USER/.ssh/authorized_keys && chown -R $USER:$USER /home/$USER/.ssh && sudo chmod 600 /home/$USER/.ssh/authorized_keys
+```
+
+Now try to reconnect to the droplet with the new user.
+
+```sh
+ssh <user>@<domain>
+
+# E.g.
+ssh alejandro@dokku.akbal.dev
+```
+
+![New user SSH connection](https://dev-to-uploads.s3.amazonaws.com/i/kuyd4gmz0pib1he2r6og.PNG)
+
+Perfect. It has worked like a charm.
+
+### SSHD
+
+The default droplet configuration allows anyone to log in as the `root` user, this should be disabled as it is a security risk.
+
+Look at the **first step** of [this guide](https://www.digitalocean.com/community/tutorials/how-to-harden-openssh-on-ubuntu-18-04) to learn how to configure SSHD and disable `root` user login.
+
+### Docker ports
+
+<!-- TODO: this -->
+
+### Fail2Ban
+
+Fail2Ban is a utility to **protect your server from brute-force and automated attacks**. It blocks repeated connection attempts and bans them temporarily.
+
+Here is an [easy guide](https://linuxize.com/post/install-configure-fail2ban-on-ubuntu-20-04/) on how to install, configure and use it.
+
+---
+
+## 8. Dokku
+
+Now that every step of configuration is complete, we can move to the actually interesting step: **actually using Dokku**!
+
+> 🖥 These steps are done on the **Dokku droplet**.
+
+### Dokku CLI
+
+Dokku is used from the terminal, _it doesn't have an interface or a web view_, and that is its strong point, as it consumes less resources of your system that your applications will need.
+
+To start using Dokku just type `dokku` on the terminal.
+
+```sh
+dokku
+```
+
+### Common Dokku commands
+
+These are some commands that you will definitely have to use, so visit the documentation links and get familiar with them.
+
+- [Application Management](http://dokku.viewdocs.io/dokku/deployment/application-management/)
+- [Process Management](http://dokku.viewdocs.io/dokku/deployment/process-management/)
+- [Domain Configuration](http://dokku.viewdocs.io/dokku/configuration/domains/)
+
+### App creation
+
+First step will be to create an application.
+
+```sh
+dokku apps:create <app>
+
+# E.g.
+dokku apps:create my-app
+```
+
+The app _shell_ is now created, but empty. Until we push code it won't do anything.
+
+But before doing so we should configure other aspects, like the domain it is going to use.
+
+[Read more about application management in Dokku.](http://dokku.viewdocs.io/dokku/deployment/application-management/)
+
+### Domain configuration
+
+Lets add a domain so we can access our application easily from our browser once its deployed.
+
+```sh
+dokku domains:add <app> <domain>
+
+# E.g.
+dokku domains:add my-app my-app.dokku.akbal.dev
+```
+
+[Read more about managing domains in Dokku.](http://dokku.viewdocs.io/dokku/configuration/domains/)
+
+### Environment configuration
+
+If our application uses any environment variables, _for example an `.env` file_, you should add them through Dokku.
+
+```sh
+dokku config:set <app> <variables>
+
+# E.g.
+dokku config:set my-app NODE_ENV=production
+
+# You can add multiple environment variables.
+dokku config:set my-app NODE_ENV=production SECURITY_KEY=XXX
+```
+
+> Keep in mind that executing this command will restart the application.
+
+[Read more about managing environment variables in Dokku.](http://dokku.viewdocs.io/dokku/configuration/environment-variables/)
+
+### Deploying code
+
+Now its time for the real deal, we have configured everything on our local machine and on the server, so **lets deploy**!
+
+> 💻 These steps are done on our **local machine**.
+
+Lets add Dokku as a git remote so we can push code to it.
+
+```sh
+git remote add <remote-name> dokku@<remote>:<application>
+
+# E.g.
+git remote add dokku dokku@dokku.akbal.dev:my-app
+```
+
+Only thing left is to push the code, lets try!
+
+```sh
+git push <remote-name> <local-branch>:master
+
+# E.g.
+git push dokku main
+
+# Or if your branch is already master
+git push dokku master
+```
+
+**And that is it!** Once the code is pushed you should see Dokku detecting and building your application! 🥰
+
+![Successful deploy](https://dev-to-uploads.s3.amazonaws.com/i/5g8ilnovup6lkgh6tz1d.PNG)
+
+> If this step is giving you trouble, chances are that you might not have added your private SSH Key to your current terminal, learn more in the _[Add SSH Key](#add-ssh-key)_ step.
+
+Once Dokku is done it will output a link to visit your application in your browser, do that!
+
+> _The website might not work because Dokku forces [HSTS](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security), and we haven't configured TLS/SSL yet. [Learn how to disable HSTS.](http://dokku.viewdocs.io/dokku/configuration/nginx/#hsts-header)_
+
+### TLS/SSL configuration
+
+We will add the [lets encrypt plugin](https://github.com/dokku/dokku-letsencrypt) to Dokku so the application will be served with **HTTPS**.
+
+First add the `letsencrypt` plugin to Dokku.
+
+```sh
+sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+```
+
+Then add a **required** `letsencrypt` contact email through environment variables.
+
+```sh
+dokku config:set <app> DOKKU_LETSENCRYPT_EMAIL=<email>
+
+# E.g.
+dokku config:set my-app DOKKU_LETSENCRYPT_EMAIL=contact@akbal.dev
+
+# We can set the contact email globally too, so it works for any application.
+dokku config:set --global DOKKU_LETSENCRYPT_EMAIL=<email>
+```
+
+Now its time to generate a certificate for our application.
+
+```sh
+dokku letsencrypt <app>
+
+# E.g.
+dokku letsencrypt my-app
+```
+
+It was that easy to add **HTTPS**.
+
+Check our super secure site!
+
+![Application with TLS](https://dev-to-uploads.s3.amazonaws.com/i/8rky1dlsnndvvc0i8vxg.PNG)
+
+[Read more about configuring the letsencrypt plugin.](https://github.com/dokku/dokku-letsencrypt)
+
+### Scale processes
+
+Scaling the processes is really easy, you just have to tell Dokku and it will handle everything.
+
+> 🖥 These steps are done on the **Dokku droplet**.
+
+```sh
+dokku ps:scale <app> <process-type>=<count>
+
+# E.g.
+dokku ps:scale my-app web=1
+
+# Even multiple types
+dokku ps:scale my-app web=1 worker=2
+```
+
+[Read more about scaling processes in Dokku.](http://dokku.viewdocs.io/dokku/deployment/process-management/#psscale-command)
+
+---
+
+## 9. Misc
+
+### Further knowledge
+
+I encourage you to go to the [Dokku documentation](http://dokku.viewdocs.io/dokku/) and toy with your **now complete** Dokku set up. You will learn many great things like [how to read the logs](http://dokku.viewdocs.io/dokku/deployment/logs/) of your application.
+
+### Troubleshooting
+
+{% collapsible I need to identify what is going wrong %}
+
+Enable [Trace Mode](http://dokku.viewdocs.io/dokku/getting-started/troubleshooting/).
+
+In this mode output will be more verbose, helping you locate any error!
+
+{% endcollapsible %}
+
+<!--  -->
+
+{% collapsible Can't push code to Dokku remote %}
+
+This might be because you have not added the private SSH Key to your terminal, try adding it!
+
+{% endcollapsible %}
+
+<!--  -->
+
+{% collapsible Dokku remote Git branch is ahead of time %}
+
+I've been in a situation where I had commited to Dokku and went back locally to an earlier commit, this created many problems when trying to push again, because Dokku's own git repository was _in the future_. Thankfully, theres a very easy solution: force push! 💪
+
+```sh
+git push --force dokku <branch>
+
+# E.g.
+git push --force dokku main
+```
+
+{% endcollapsible %}
+
+<!--  -->
+
+{% collapsible Agent returned different signature type ssh-rsa (expected rsa-sha2-512) (_Windows 10_) %}
+
+It seems that the ssh binaries on windows 10 are outdated and the connection is refused by the server, a solution is to use `Git Bash` or any other terminal with updated binaries, more on this [issue here](https://github.com/PowerShell/Win32-OpenSSH/issues/1263)
+
+{% endcollapsible %}
+
+---
+
+## 10. End
+
+I hope you have enjoyed my complete guide and find it useful, It has taken many days to bring you this knowledge.
+
+### Useful links
+
+These are some resources that can be very useful through your Dokku journey.
+
+- [Dokku cheatsheet by jejete](https://cheatography.com/jejete/cheat-sheets/dokku/pdf/)
+- [Dokku Slack community](https://glider-slackin.herokuapp.com/)
+
+### Self promotion
+
+If you have found this guide useful then you should follow me, I will be posting more interesting content! ♥
+
+- [GitHub](https://github.com/AlejandroAkbal/)
+- [LinkedIn](https://www.linkedin.com/in/alejandro-akbal/)
+- [Twitter](https://twitter.com/AlejandroAkbal)
+- [Dev.to](https://dev.to/alejandroakbal)
+- [Medium](https://medium.com/@alejandroakbal)
+
+### Credit
+
+This guide was made possible thanks to many wonderful people.
+
+- Linuxize
+- DigitalOcean and their community
+- AskUbuntu for the [troubleshooting help](https://askubuntu.com/questions/1218023/copying-ssh-key-from-root-to-another-user-on-same-machine)
