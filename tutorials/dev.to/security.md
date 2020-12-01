@@ -55,6 +55,10 @@ Now that our packages are updated, we should install an automated solution to ke
 
 ## New user
 
+Using the default super user `root` is always bad practice, it does everything with the maximum level of permissions, allowing you to break anything; and more critically... _Access to anything on the system_.
+
+Instead, we should use a normal user with super user **privileges**. [This tutorial on DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-create-a-new-sudo-enabled-user-on-ubuntu-20-04-quickstart) will guide you to do so.
+
 ---
 
 ## Root user
