@@ -43,11 +43,13 @@ sudo apt autoremove -y    # Remove unnecessary packages
 sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 ```
 
-<!-- TODO: automatic updates -->
-
 ---
 
-## SSH Key pair
+## Automatic updates
+
+Now that our packages are updated, we should install an automated solution to keep our system always up to date.
+
+[This tutorial on Linuxize](https://linuxize.com/post/how-to-set-up-automatic-updates-on-ubuntu-18-04/) will help you install and configure the `unattended-upgrades` package, which is exactly what we need.
 
 ---
 
