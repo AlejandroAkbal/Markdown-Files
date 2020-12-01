@@ -32,6 +32,8 @@ If you don't have a server you might want to look at the [Useful resources](#use
 
 ## Updates
 
+The first and probably most important step is to always keep the system up to date. To do so just open the terminal to update and upgrade our packages via [apt](https://linuxize.com/post/how-to-use-apt-command/).
+
 ```sh
 sudo apt update           # Update package information
 sudo apt full-upgrade -y  # Upgrade packages
