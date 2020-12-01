@@ -61,9 +61,13 @@ Instead, we should use a normal user with super user **privileges**. [This tutor
 
 ---
 
-## Root user
+## SSH credentials
 
-<!-- https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04#step-5-%E2%80%94-enabling-external-access-for-your-regular-user -->
+Now that you have a new user with super user privileges, you might want to SSH in your server with it, but might find that you cannot.
+
+This is because the credentials were stored on the user you were using, most likely `root`. Just SSH again with the previous user and copy the credentials with the `rsync` utility package.
+
+Follow the **5th step** of [this tutorial on DigitalOcean](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04#if-the-root-account-uses-ssh-key-authentication) to do so.
 
 ---
 
