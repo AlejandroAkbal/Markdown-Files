@@ -5,9 +5,9 @@ Tags: ubuntu, security, devops, server
 
 # Introduction
 
-This complete tutorial will aid you in setting up a secure Ubuntu server from scratch.
+This tutorial will aid you in setting up a secure Ubuntu server from scratch.
 
-Keep in mind that this is not a common tutorial, this is the culmination of all the knowledge I have gathered from managing my own servers for more than two years.
+Keep in mind that this is not a common tutorial, this is the culmination of all the knowledge I have gathered from managing my own servers for more than three years.
 
 ---
 
@@ -92,7 +92,7 @@ Now that our packages are updated, we should install an automated solution to ke
 
 - [How to get a free Google server forever](https://dev.to/phocks/how-to-get-a-free-google-server-forever-1fpf), a perfect test environment for this tutorial.
 - [How to get 2x Oracle Cloud servers free forever](https://dev.to/phocks/how-to-get-2x-oracle-cloud-servers-free-forever-4o22), another option for test environments.
-- [Create your own Heroku with Dokku on DigitalOcean](https://dev.to/alejandroakbal/create-your-own-heroku-with-dokku-on-digitalocean-14ef), a guide to deploy your code to your now secure server.
+- [Create your own Heroku with Dokku on DigitalOcean](https://dev.to/alejandroakbal/create-your-own-heroku-with-dokku-on-digitalocean-14ef), a guide to deploy your applications to your now-secure server.
 
 ### Self promotion
 
@@ -112,5 +112,6 @@ Or support me financially
 
 ### Credit
 
-- [DigitalOcean Community](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04)
-- [OSRadar Community](https://www.osradar.com/guide-to-initial-server-setup-on-ubuntu-20-04/)
+- DigitalOcean Community
+- Linuxize Community
+- OSRadar Community
