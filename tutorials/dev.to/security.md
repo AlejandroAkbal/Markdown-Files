@@ -93,6 +93,10 @@ Check out [this tutorial on DigitalOcean](https://www.digitalocean.com/community
 
 ## Fail2Ban
 
+Fail2Ban protects you from brute-force attacks. It bans bad actors from accessing the server for a specified quantity of time.
+
+Learn how to install and configure Fail2Ban [with this tutorial on Linuxize](https://linuxize.com/post/install-configure-fail2ban-on-ubuntu-20-04/).
+
 ---
 
 ## Tips & Tricks
