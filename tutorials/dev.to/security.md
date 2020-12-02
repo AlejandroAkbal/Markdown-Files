@@ -130,6 +130,17 @@ The database should only be allowed from local connections; or if ran externally
 
 ---
 
+## Recommendations
+
+### Dokku
+
+Now that you have your own secure infrastructure, you might want to create applications and services.
+
+[Dokku](http://dokku.viewdocs.io/dokku/) is perfect for that. It allows you to containerize, build and run your applications with a simple `git push`.
+
+Check out [my own tutorial](https://dev.to/alejandroakbal/create-your-own-heroku-with-dokku-on-digitalocean-14ef) to learn how to set up and use Dokku.
+
+> _There are some parts that you might want to skip, as they are similar to this tutorial._
 
 ---
 
