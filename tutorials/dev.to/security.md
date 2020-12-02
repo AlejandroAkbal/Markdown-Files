@@ -99,14 +99,37 @@ Learn how to install and configure Fail2Ban [with this tutorial on Linuxize](htt
 
 ---
 
-## Tips & Tricks
+## Miscellaneous
 
-<!-- TODO: PHP info -->
-<!-- TODO: database info -->
-<!-- TODO: Docker info -->
-<!-- TODO: web server info -->
+These are some **quick specific guides** that you should keep in mind if you use any of this software.
 
-<!-- TODO: recommend Dokku -->
+### Nginx
+
+Nginx has various configuration files, its defaults are pretty good but you might want to take a look at it.
+
+Use [this tutorial on Acunetix](https://www.acunetix.com/blog/web-security-zone/hardening-nginx/) as a starting point.
+
+There is also [this pretty nifty tool by DigitalOcean](https://www.digitalocean.com/community/tools/nginx) that allows you to configure Nginx in a visual manner. It includes popular presets, for example for NodeJS and PHP applications.
+
+### Apache2
+
+Apache might require more work, as its defaults leak some information about your system.
+
+Start your configuration journey with [this tutorial by Tecmint](https://www.tecmint.com/apache-security-tips/).
+
+### PHP
+
+### Database
+
+I have used MySQL and MariaDB on the past, by default their ports are opened externally, that shouldn't be allowed, as it is a security risk.
+
+The database should only be allowed from local connections; or if ran externally, by whitelisted IPs.
+
+- Learn how to configure MySQL with [this tutorial on DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04).
+- Learn how to configure MariaDB with [this tutorial on DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-20-04).
+
+---
+
 
 ---
 
