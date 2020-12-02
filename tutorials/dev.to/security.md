@@ -83,6 +83,12 @@ Follow the **first step** [of this tutorial on DigitalOcean](https://www.digital
 
 ## UFW
 
+UFW is Ubuntu's default firewall and is extremely useful. By default it allows `http` and `ssh` connections, depending of your use case you might not need some of those rules.
+
+Check out [this tutorial on DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04) to learn how to configure UFW.
+
+> If you changed the `SSH` port on an earlier step, you might want to create a new UFW rule for that port.
+
 ---
 
 ## Fail2Ban
