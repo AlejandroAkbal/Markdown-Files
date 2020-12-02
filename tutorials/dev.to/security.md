@@ -73,6 +73,12 @@ Follow the **5th step** of [this tutorial on DigitalOcean](https://www.digitaloc
 
 ## SSHD
 
+SSHD manages the SSH connections to the server. Its default configuration is good but some changes must be made, like disabling the `root` user login and changing the default `SSH` port.
+
+Follow the **first step** [of this tutorial on DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-harden-openssh-on-ubuntu-18-04) to learn how to configure SSHD.
+
+> It is recommended that you change the default `SSH` port
+
 ---
 
 ## UFW
