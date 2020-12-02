@@ -549,6 +549,7 @@ Or support me financially. 💸
 - [LiberaPay](https://redirect.r34.app/liberapay)
 - [PayPal](https://redirect.r34.app/paypal)
 
+If you want to continue learning check out this "**[How to completely secure an Ubuntu server](https://dev.to/alejandroakbal/how-to-completely-secure-an-ubuntu-server-55i2)**" article by myself.
 
 ### Credit
 
