@@ -535,13 +535,20 @@ These are some resources that can be very useful through your Dokku journey.
 
 ### Self promotion
 
-If you have found this guide useful then you should follow me, I will be posting more interesting content! ♥
+If you have found this tutorial useful then you should follow me, I will be posting more interesting content! 🥰
 
-- [GitHub](https://github.com/AlejandroAkbal/)
-- [LinkedIn](https://www.linkedin.com/in/alejandro-akbal/)
+- [GitHub](https://github.com/AlejandroAkbal)
 - [Twitter](https://twitter.com/AlejandroAkbal)
 - [Dev.to](https://dev.to/alejandroakbal)
 - [Medium](https://medium.com/@alejandroakbal)
+- [LinkedIn](https://www.linkedin.com/in/alejandro-akbal)
+
+Or support me financially. 💸
+
+- [GitHub Sponsors](https://github.com/sponsors/AlejandroAkbal)
+- [LiberaPay](https://redirect.r34.app/liberapay)
+- [PayPal](https://redirect.r34.app/paypal)
+
 
 ### Credit
 
