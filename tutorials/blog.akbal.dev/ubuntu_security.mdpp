@@ -154,19 +154,11 @@ Check out [my own tutorial](https://dev.to/alejandroakbal/create-your-own-heroku
 
 ### Self promotion
 
-If you have found this tutorial useful then you should follow me, I will be posting more interesting content! 🥰
+<!-- INCLUDE -->
 
-- [GitHub](https://github.com/AlejandroAkbal)
-- [Twitter](https://twitter.com/AlejandroAkbal)
-- [Dev.to](https://dev.to/alejandroakbal)
-- [Medium](https://medium.com/@alejandroakbal)
-- [LinkedIn](https://www.linkedin.com/in/alejandro-akbal)
+!INCLUDE "../include/self_promotion.mdpp"
 
-Or support me financially. 💸
-
-- [GitHub Sponsors](https://github.com/sponsors/AlejandroAkbal)
-- [LiberaPay](https://redirect.r34.app/liberapay)
-- [PayPal](https://redirect.r34.app/paypal)
+<!-- INCLUDE -->
 
 ### Credit
 
