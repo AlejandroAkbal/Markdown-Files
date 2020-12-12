@@ -14,11 +14,8 @@ pip install -r requirements.txt
 
 ```sh
 # Build a file
-markdown-pp <input> -o <output> -e latexrender, includeurl, youtubeembed
-
-# Watch files
-markdown-pp -w -e latexrender, includeurl, youtubeembed
+markdown-pp <input> -o <output>
 
 # Copy processed file to clipboard (Powershell)
-... | Set-Clipboard
+markdown-pp <input> | Set-Clipboard
 ```
