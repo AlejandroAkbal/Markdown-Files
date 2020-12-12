@@ -2,6 +2,6 @@
 
 <!-- INCLUDE -->
 
-!INCLUDE "self_promotion.mdpp"
+!INCLUDE "./tutorials/include/self_promotion.mdpp"
 
 <!-- INCLUDE -->

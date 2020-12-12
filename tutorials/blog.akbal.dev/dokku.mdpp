@@ -537,7 +537,7 @@ These are some resources that can be very useful through your Dokku journey.
 
 <!-- INCLUDE -->
 
-!INCLUDE "../include/self_promotion.mdpp"
+!INCLUDE "./tutorials/include/self_promotion.mdpp"
 
 <!-- INCLUDE -->
 
