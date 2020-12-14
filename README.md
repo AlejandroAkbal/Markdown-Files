@@ -29,7 +29,7 @@ markdown-pp <input> | Set-Clipboard
 Processes all files to the `dist` directory.
 
 ```sh
-python ./process_all.py
+python ./scripts/process_all.py
 ```
 
 > This is the recommended way since it bypasses OS encoding and uses `UTF8`.
