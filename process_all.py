@@ -11,7 +11,7 @@ for file in list_of_files_that_match:
     input_file = Path.absolute(file)
     input_file_data = open(input_file, 'r')
 
-    output_file = f'{input_file.stem}.processed.md'
+    output_file = f'dist/{input_file.stem}.processed.md'
     output_file_data = open(output_file, 'w')
 
     print(f'File: {file}')
