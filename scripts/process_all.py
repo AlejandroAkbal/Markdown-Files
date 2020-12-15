@@ -37,7 +37,8 @@ def process_mdpp_files_from_dir(input_dir, output_dir):
         output_file_data.close()
 
 
-modules = ['include']
+modules = ['Include', 'IncludeCode', 'Reference',
+           'TableOfContents', 'YoutubeEmbed']
 input_directory = './src'
 output_directory = './dist'
 
