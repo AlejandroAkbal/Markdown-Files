@@ -111,10 +111,10 @@ For example, if you are using Docker, you might want to learn how to remove unne
 
 !INCLUDE "./src/tutorials/include/self_promotion.mdpp", 2
 
-<!-- INCLUDE -->
+<!-- /INCLUDE -->
 
 <!-- INCLUDE -->
 
 !INCLUDE "./src/tutorials/include/credit.md", 2
 
-<!-- INCLUDE -->
+<!-- /INCLUDE -->

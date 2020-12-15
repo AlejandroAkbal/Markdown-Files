@@ -156,10 +156,10 @@ Check out [my own tutorial](https://dev.to/alejandroakbal/create-your-own-heroku
 
 !INCLUDE "./src/tutorials/include/self_promotion.md", 2
 
-<!-- INCLUDE -->
+<!-- /INCLUDE -->
 
 <!-- INCLUDE -->
 
 !INCLUDE "./src/tutorials/include/credit.md", 2
 
-<!-- INCLUDE -->
+<!-- /INCLUDE -->
