@@ -66,7 +66,7 @@ sudo journalctl --rotate && sudo journalctl --vacuum-time=1s
 
 ---
 
-## Find the biggest files
+## Biggest files
 
 Now we are switching to a more manual approach, lets find out what the biggest files on our system are.
 
@@ -101,7 +101,7 @@ sudo rm /path/to/file
 
 ## End
 
-### What next
+### Next
 
 You can now search for more specific guides.
 
@@ -109,12 +109,6 @@ For example, if you are using Docker, you might want to learn how to remove unne
 
 <!-- INCLUDE -->
 
-!INCLUDE "./src/tutorials/include/self_promotion.mdpp", 2
-
-<!-- /INCLUDE -->
-
-<!-- INCLUDE -->
-
-!INCLUDE "./src/tutorials/include/credit.md", 2
+!INCLUDE "./src/tutorials/include/self_promotion.md", 2
 
 <!-- /INCLUDE -->
