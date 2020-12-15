@@ -156,7 +156,7 @@ Check out [my own tutorial](https://dev.to/alejandroakbal/create-your-own-heroku
 
 <!-- INCLUDE -->
 
-!INCLUDE "./tutorials/include/self_promotion.mdpp"
+!INCLUDE "./src/tutorials/include/self_promotion.mdpp"
 
 <!-- INCLUDE -->
 

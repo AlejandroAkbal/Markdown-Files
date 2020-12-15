@@ -3,7 +3,7 @@ from MarkdownPP import MarkdownPP
 
 modules = ['include']
 
-current_dir_utility = Path('.')
+current_dir_utility = Path('./src')
 
 list_of_files_that_match = current_dir_utility.rglob('*.mdpp')
 
