@@ -152,11 +152,9 @@ Check out [my own tutorial](https://dev.to/alejandroakbal/create-your-own-heroku
 - [How to get 2x Oracle Cloud servers free forever](https://dev.to/phocks/how-to-get-2x-oracle-cloud-servers-free-forever-4o22), a more powerful alternative to the free GCE server.
 - [Create your own Heroku with Dokku on DigitalOcean](https://dev.to/alejandroakbal/create-your-own-heroku-with-dokku-on-digitalocean-14ef), a guide to deploy your applications to your now-secure server.
 
-### Self promotion
-
 <!-- INCLUDE -->
 
-!INCLUDE "./src/tutorials/include/self_promotion.mdpp"
+!INCLUDE "./src/tutorials/include/self_promotion_with_header.mdpp", 2
 
 <!-- INCLUDE -->
 

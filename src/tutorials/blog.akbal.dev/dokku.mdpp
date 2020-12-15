@@ -533,11 +533,9 @@ These are some resources that can be very useful through your Dokku journey.
 - [Dokku cheatsheet by jejete](https://cheatography.com/jejete/cheat-sheets/dokku/pdf/)
 - [Dokku Slack community](https://glider-slackin.herokuapp.com/)
 
-### Self promotion
-
 <!-- INCLUDE -->
 
-!INCLUDE "./src/tutorials/include/self_promotion.mdpp"
+!INCLUDE "./src/tutorials/include/self_promotion_with_header.mdpp", 2
 
 <!-- INCLUDE -->
 
