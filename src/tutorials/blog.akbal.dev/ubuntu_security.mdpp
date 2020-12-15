@@ -158,8 +158,8 @@ Check out [my own tutorial](https://dev.to/alejandroakbal/create-your-own-heroku
 
 <!-- INCLUDE -->
 
-### Credit
+<!-- INCLUDE -->
 
-Thanks to
+!INCLUDE "./src/tutorials/include/credit_with_header.mdpp", 2
 
-- Any linked website and community for their wonderful tutorials and help
+<!-- INCLUDE -->
