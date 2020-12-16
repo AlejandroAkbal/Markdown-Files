@@ -102,3 +102,9 @@ If you want to read more, please check out the [official Docker guide to pruning
 !INCLUDE "./src/tutorials/include/self_promotion.md", 2
 
 <!-- /INCLUDE -->
+
+### Conclusion
+
+Today you have learned how to free up space on your system by removing Docker's unused images, containers, volumes and networks.
+
+**Let me know how much space you have recovered in the comments!**
