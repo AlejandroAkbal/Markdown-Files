@@ -95,17 +95,13 @@ sudo rm /path/to/file
 
 ---
 
-<!-- ## Miscellaneous
-
---- -->
-
 ## End
 
-### Next
+### What next?
 
 You can now search for more specific guides.
 
-For example, if you are using Docker, you might want to learn how to remove unnecessary images or containers.
+For example, if you are using Docker, you might want to learn [how to remove unnecessary resources](https://blog.akbal.dev/how-to-remove-unused-docker-resources).
 
 <!-- INCLUDE -->
 
