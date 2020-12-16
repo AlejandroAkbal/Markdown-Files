@@ -93,7 +93,7 @@ You might find that some images can't be removed because they are used. In this 
 
 ## End
 
-### Useful links
+### What's next?
 
 If you want to read more, please check out the [official Docker guide to pruning](https://docs.docker.com/config/pruning/).
 
