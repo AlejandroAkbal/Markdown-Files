@@ -1,0 +1,104 @@
+<!--
+Title: How to remove unused Docker resources
+Tags: docker, tutorial, devops, webdev, backend, cloud, beginners, server
+-->
+
+# Introduction
+
+Chances are that you've been running Docker for some time and found out that your system's storage is almost full.
+
+This is completely normal as Docker bundles all the needed dependencies with each container and doesn't remove anything if you don't explicitly tell it to do so.
+
+So lets learn how to prune unused and unnecessary **images, containers, volumes and networks**!
+
+> This tutorial will help you liberate space on your system without breaking anything in the process.
+
+---
+
+## Before we start
+
+We will be using the Docker CLI, so I expect you to be a bit familiar with it.
+
+Otherwise just use `docker --help` on the terminal and toy with it a little.
+
+### Requisites
+
+- A little bit of Docker knowledge
+
+---
+
+## Images
+
+Remove all images that are not tagged or referenced by any container
+
+```sh
+docker image prune
+```
+
+---
+
+## Containers
+
+Remove all stopped containers
+
+```sh
+docker container prune
+```
+
+---
+
+## Volumes
+
+Remove all volumes not used by at least one container
+
+```sh
+docker volume prune
+```
+
+---
+
+## Networks
+
+Remove all networks not used by at least one container
+
+```sh
+docker network prune
+```
+
+---
+
+## Everything
+
+To finalize, lets remove everything --_but volumes_-- with a single command.
+
+```sh
+docker system prune
+```
+
+If you want to remove volumes too, just append `--volumes` at the end.
+
+```sh
+docker system prune --volumes
+```
+
+**And voila, that removed every single resource that was unnecessary on your system!**
+
+---
+
+## Troubleshooting
+
+You might find that some images can't be removed because they are used. In this case you want to remove the resource that is using it, most likely a container.
+
+---
+
+## End
+
+### Useful links
+
+If you want to read more, please check out the [official Docker guide to pruning](https://docs.docker.com/config/pruning/).
+
+<!-- INCLUDE -->
+
+!INCLUDE "./src/tutorials/include/self_promotion.md", 2
+
+<!-- /INCLUDE -->
