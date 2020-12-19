@@ -1,0 +1,41 @@
+/* Disable image cover */
+.blog-post-card-cover {
+  display: none;
+}
+
+/* Disable article text */
+.blog-post-card-brief {
+  display: none;
+}
+
+/* Disable Hashnode icon */
+a[aria-label='Find me on Hashnode'] {
+  display: none;
+}
+
+/* Less margin than the original values */
+.blog-post-card {
+  margin-bottom: 1.5rem;
+}
+
+/* --- Better author area --- */
+.blog-author-area {
+  padding: 1rem;
+  width: max-content;
+}
+
+.blog-author-card {
+  border: 1px solid #333;
+
+  box-shadow: 10px 10px 0 #333;
+
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* --- Better subscription form --- */
+.blog-subscription-form {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
