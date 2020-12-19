@@ -21,7 +21,7 @@ a[aria-label='Find me on Hashnode'] {
 /* --- Better author area --- */
 .blog-author-area {
   padding: 1rem;
-  width: max-content;
+  max-width: max-content;
 }
 
 .blog-author-card {
