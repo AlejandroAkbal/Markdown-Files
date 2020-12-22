@@ -9,7 +9,7 @@ Chances are that you've been running Docker for some time and found out that you
 
 This is completely normal as Docker bundles all the needed dependencies with each container and doesn't remove anything if you don't explicitly tell it to do so.
 
-So lets learn how to prune unused and unnecessary **images, containers, volumes and networks**!
+So let's learn how to prune unused and unnecessary **images, containers, volumes and networks**!
 
 > This tutorial will help you liberate space on your system without breaking anything in the process.
 
@@ -19,11 +19,11 @@ So lets learn how to prune unused and unnecessary **images, containers, volumes 
 
 We will be using the Docker CLI, so I expect you to be a bit familiar with it.
 
-Otherwise just use `docker --help` on the terminal and toy with it a little.
+Otherwise, just use `docker --help` on the terminal and toy with it a little.
 
 ### Requisites
 
-- A little bit of Docker knowledge
+- A bit of Docker knowledge
 
 ---
 
@@ -81,7 +81,7 @@ If you want to remove volumes too, just append `--volumes` at the end.
 docker system prune --volumes
 ```
 
-**And voila, that removed every single resource that was unnecessary on your system!**
+**And voilà, that removed every single resource that was unnecessary on your system!**
 
 ---
 

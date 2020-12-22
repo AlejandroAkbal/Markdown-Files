@@ -1,4 +1,4 @@
-# Self promotion
+# Self-promotion
 
 If you have found this useful then you should follow me, I will be posting more interesting content! 🥰
 

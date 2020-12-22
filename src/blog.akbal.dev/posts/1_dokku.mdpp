@@ -25,7 +25,7 @@ You might be wondering what Dokku is.
 
 > [Dokku](https://github.com/dokku/dokku) is a docker-powered **Platform-as-a-Service** (PaaS) that helps you build and manage the lifecycle of applications.
 
-This means that it shares many similarities with Heroku, so if you have used Heroku before, this will come to you as familiar. For example, you can **push code to deploy**, use buildpacks, scale processes, etc
+This means that it shares many similarities with Heroku, so if you have used Heroku before, this will come to you as familiar. For example, you can **push code to deploy**, use buildpacks, scale processes, etc.
 
 ### Preface
 
@@ -44,23 +44,23 @@ As an example application we will use this [NodeJS getting started project](http
 
 ### Requirements info
 
-If you don't have a DigitalOcean account, you should create one, its free! And if you use my [referral link](https://m.do.co/c/89d935019679) you will receive \$100 as credit for free!
+If you don't have a DigitalOcean account, you should create one, it's free! And if you use my [referral link](https://m.do.co/c/89d935019679) you will receive \$100 as credit for free!
 
-If you don't have a SSH Key pair, then [follow this tutorial](https://www.digitalocean.com/docs/droplets/how-to/add-ssh-keys/) to learn how to generate and add them to your DigitalOcean account.
+If you don't have an SSH Key pair, then [follow this tutorial](https://www.digitalocean.com/docs/droplets/how-to/add-ssh-keys/) to learn how to generate and add them to your DigitalOcean account.
 
 ---
 
 ## 1. Droplet creation
 
-This might be the easiest step, as DigitalOcean offers a [Ubuntu 20.04 image with Dokku already set up](https://do.co/3nzKhrp), just follow that link and create a droplet.
+This might be the easiest step, as DigitalOcean offers an [Ubuntu 20.04 image with Dokku already set up](https://do.co/3nzKhrp), just follow that link and create a droplet.
 
 Then just choose whatever options meet your needs.
 
-> ⚠ You should choose a Datacenter that is near you or your clients. ⚠
+> ⚠ You should choose a Data center that is near you or your clients. ⚠
 
-![Datacenter Region](https://dev-to-uploads.s3.amazonaws.com/i/1mdln5aicjyzlguc7yuq.PNG)
+![Data center Region](https://dev-to-uploads.s3.amazonaws.com/i/1mdln5aicjyzlguc7yuq.PNG)
 
-Once it's created, go to the "Networking" tab of your new droplet and assign a floating IP.
+Once it's created, go to the “Networking” tab of your new droplet and assign a floating IP.
 
 ![Floating IP](https://dev-to-uploads.s3.amazonaws.com/i/8r8zri2yq1lyvs57skak.PNG)
 
@@ -78,7 +78,7 @@ For the sake of this guide, I will be using the subdomain `dokku` on my own doma
 
 ## 2. Domain management
 
-My current domain manager is CloudFlare, but you can use any other domain registrar or manager, the instructions should be the same. 😊
+My current domain manager is Cloudflare, but you can use any other domain registrar or manager, the instructions should be the same. 😊
 
 ### DNS records
 
@@ -86,13 +86,13 @@ We have to configure our DNS settings to point to our new droplet's floating IP.
 
 Start by adding a **`A`** type record with the hostname and floating IP you assigned earlier in the Dokku set up.
 
-![CloudFlare A record](https://dev-to-uploads.s3.amazonaws.com/i/af7brirn5r9bv1pwq0i3.PNG)
+![Cloudflare A record](https://dev-to-uploads.s3.amazonaws.com/i/af7brirn5r9bv1pwq0i3.PNG)
 
 You should also add a **catch-all** rule so anything you deploy on a subdomain is automatically forwarded to the droplet.
 
-![CloudFlare A catch-all rule](https://dev-to-uploads.s3.amazonaws.com/i/bk71sau6852rtprtkkud.PNG)
+![Cloudflare A catch-all rule](https://dev-to-uploads.s3.amazonaws.com/i/bk71sau6852rtprtkkud.PNG)
 
-> _If you're using CloudFlare and have trouble connecting in the next steps, try to set the DNS record proxy to `DNS only` instead of `Proxied`, as it seems to cause trouble._
+> _If you're using Cloudflare and have trouble connecting in the next steps, try to set the DNS record proxy to `DNS only` instead of `Proxied`, as it seems to cause trouble._
 
 ---
 
@@ -104,7 +104,7 @@ Before we start, we should configure some things on our end.
 
 ### Add SSH Key
 
-We have to add our Private SSH Key to our local terminal so we can authenticate and connect to the droplet.
+We have to add our Private SSH Key to our local terminal, so we can authenticate and connect to the droplet.
 
 ```sh
 eval `ssh-agent -s` # Start the agent that holds on to our keys
@@ -142,7 +142,7 @@ We will need an application to run on Dokku, don't we?
 
 ### Clone repository
 
-Lets clone the [example application](#preface).
+Let's clone the [example application](#preface).
 
 ```sh
 git clone https://github.com/heroku/node-js-getting-started.git
@@ -210,7 +210,7 @@ Dokku will download and use the NodeJS version specified in the `engines` sectio
   },
 ```
 
-You should add this part, otherwise Dokku will chose a version of NodeJS that might or might not work with your application.
+You should add this part, otherwise Dokku will choose a version of NodeJS that might or might not work with your application.
 
 ### Further configuration
 
@@ -226,7 +226,7 @@ Now that we can connect to the droplet and have set up our application, lets con
 
 ### RAM Swap
 
-Chances are that you will be using Dokku on a low memory (<2GB) droplet.
+Chances are that you will be using Dokku on a low memory (<2 GB) droplet.
 
 To fix possible failures due to low memory, we should create a bigger [swap file](https://techterms.com/definition/swap_file). Read [this tutorial](http://dokku.viewdocs.io/dokku/getting-started/advanced-installation/#vms-with-less-than-1-gb-of-memory) to learn how to do so.
 
@@ -307,7 +307,7 @@ Here is an [easy guide](https://linuxize.com/post/install-configure-fail2ban-on-
 
 ## 8. Dokku
 
-Now that every step of configuration is complete, we can move to the actually interesting step: **actually using Dokku**!
+Now that every step of configuration is complete, we can move to the interesting step: **actually using Dokku**!
 
 > 🖥 These steps are done on the **Dokku droplet**.
 
@@ -342,13 +342,13 @@ dokku apps:create my-app
 
 The app _shell_ is now created, but empty. Until we push code it won't do anything.
 
-But before doing so we should configure other aspects, like the domain it is going to use.
+But before doing so, we should configure other aspects, like the domain it is going to use.
 
 [Read more about application management in Dokku.](http://dokku.viewdocs.io/dokku/deployment/application-management/)
 
 ### Domain configuration
 
-Lets add a domain so we can access our application easily from our browser once its deployed.
+Let's add a domain so we can access our application easily from our browser once its deployed.
 
 ```sh
 dokku domains:add <app> <domain>
@@ -361,7 +361,7 @@ dokku domains:add my-app my-app.dokku.akbal.dev
 
 ### Environment configuration
 
-If our application uses any environment variables, _for example an `.env` file_, you should add them through Dokku.
+If our application uses any environment variables, _for example a `.env` file_, you should add them through Dokku.
 
 ```sh
 dokku config:set <app> <variables>
@@ -379,11 +379,11 @@ dokku config:set my-app NODE_ENV=production SECURITY_KEY=XXX
 
 ### Deploying code
 
-Now its time for the real deal, we have configured everything on our local machine and on the server, so **lets deploy**!
+Now it's time for the real deal, we have configured everything on our local machine and on the server, so **let's deploy**!
 
 > 💻 These steps are done on our **local machine**.
 
-Lets add Dokku as a git remote so we can push code to it.
+Let's add Dokku as a git remote so we can push code to it.
 
 ```sh
 git remote add <remote-name> dokku@<remote>:<application>
@@ -436,7 +436,7 @@ dokku config:set my-app DOKKU_LETSENCRYPT_EMAIL=contact@akbal.dev
 dokku config:set --global DOKKU_LETSENCRYPT_EMAIL=<email>
 ```
 
-Now its time to generate a certificate for our application.
+Now it's time to generate a certificate for our application.
 
 ```sh
 dokku letsencrypt <app>
@@ -516,7 +516,7 @@ git push --force dokku main
 
 {% collapsible Agent returned different signature type ssh-rsa (expected rsa-sha2-512) (_Windows 10_) %}
 
-It seems that the ssh binaries on windows 10 are outdated and the connection is refused by the server, a solution is to use `Git Bash` or any other terminal with updated binaries, more on this [issue here](https://github.com/PowerShell/Win32-OpenSSH/issues/1263)
+It seems that the ssh binaries on Windows 10 are outdated and the connection is refused by the server, a solution is to use `Git Bash` or any other terminal with updated binaries, more on this [issue here](https://github.com/PowerShell/Win32-OpenSSH/issues/1263)
 
 {% endcollapsible %}
 
@@ -530,7 +530,7 @@ I hope you have enjoyed my complete guide and find it useful, It has taken many 
 
 These are some resources that can be very useful through your Dokku journey.
 
-- [Dokku cheatsheet by jejete](https://cheatography.com/jejete/cheat-sheets/dokku/pdf/)
+- [Dokku cheat sheet by jejete](https://cheatography.com/jejete/cheat-sheets/dokku/pdf/)
 - [Dokku Slack community](https://glider-slackin.herokuapp.com/)
 
 <!-- INCLUDE -->

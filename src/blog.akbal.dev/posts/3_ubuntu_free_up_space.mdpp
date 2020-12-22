@@ -26,7 +26,7 @@ While this tutorial is focused on **Ubuntu Server**, it can be used for many oth
 
 ## Clean packages
 
-Packages are archived and stored, if these versions can't be downloaded anymore --_because there is a newer version or any other reason_--, they end up being unnecessary. So lets clean lingering packages.
+Packages are archived and stored, if these versions can't be downloaded anymore --_because there is a newer version or any other reason_--, they end up being unnecessary. So let's clean lingering packages.
 
 ```sh
 # Find no longer available packages and remove them

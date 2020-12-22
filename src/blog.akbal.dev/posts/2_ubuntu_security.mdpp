@@ -26,7 +26,7 @@ _It doesn't matter if your server is hosted on DigitalOcean, Google Cloud Engine
 
 ### Requisite info
 
-If you don't have a server you might want to look at the [Useful resources](#useful-resources) step.
+If you don't have a server, you might want to look at the [Useful resources](#useful-resources) step.
 
 ---
 
@@ -83,7 +83,7 @@ Follow the **first step** [of this tutorial on DigitalOcean](https://www.digital
 
 ## UFW
 
-UFW is Ubuntu's default firewall and is extremely useful. By default it allows `http` and `ssh` connections, depending of your use case you might not need some of those rules.
+UFW is Ubuntu's default firewall and is extremely useful. By default, it allows `http` and `ssh` connections, depending on your use case you might not need some of those rules.
 
 Check out [this tutorial on DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04) to learn how to configure UFW.
 
@@ -105,7 +105,7 @@ These are some **quick specific guides** that you should keep in mind if you use
 
 ### Nginx
 
-Nginx has various configuration files, its defaults are pretty good but you might want to take a look at it.
+Nginx has various configuration files, its defaults are pretty good, but you might want to take a look at it.
 
 Use [this tutorial on Acunetix](https://www.acunetix.com/blog/web-security-zone/hardening-nginx/) as a starting point.
 
