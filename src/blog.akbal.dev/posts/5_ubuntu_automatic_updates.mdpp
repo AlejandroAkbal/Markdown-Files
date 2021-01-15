@@ -1,0 +1,150 @@
+<!--
+Title: How to set up automatic updates on Ubuntu server
+Tags: tutorial, beginners, devops, ubuntu, webdev, backend, cloud
+-->
+
+# Introduction
+
+Setting up automatic updates can be a daunting task. But fear not, this tutorial will help you set up automatic updates correctly in less than 10 minutes.
+
+---
+
+## Before we start
+
+### Preface
+
+While this tutorial is focused on **Ubuntu Server**, it can be used for many other distributions that use the same package manager, like Ubuntu Desktop, Debian, Linux Mint, etc.
+
+### Requirements
+
+- An Ubuntu server
+- An internet connection
+- Access to your server
+
+---
+
+## Update
+
+First you'll have to update to the latest package repository definition.
+
+```sh
+sudo apt update
+```
+
+---
+
+## Install
+
+Then, we will need to install the package that does all the magic for us, [unattended-upgrades](https://wiki.debian.org/UnattendedUpgrades).
+
+```sh
+sudo apt install -y unattended-upgrades
+```
+
+_Chances are that you already have this package installed._
+
+---
+
+## Configuration
+
+Next step is to configure the package, lets start by opening the configuration file in the `nano` text editor.
+
+```sh
+sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
+```
+
+```php
+// ...
+
+Unattended-Upgrade::Allowed-Origins {
+        "${distro_id}:${distro_codename}";
+        "${distro_id}:${distro_codename}-security";
+        // Extended Security Maintenance; doesn't necessarily exist for
+        // every release and this system may not have it installed, but if
+        // available, the policy for updates is such that unattended-upgrades
+        // should also install from here by default.
+        "${distro_id}ESMApps:${distro_codename}-apps-security";
+        "${distro_id}ESM:${distro_codename}-infra-security";
+//      "${distro_id}:${distro_codename}-updates";
+//      "${distro_id}:${distro_codename}-proposed";
+//      "${distro_id}:${distro_codename}-backports";
+};
+
+// ...
+```
+
+You should read the configuration file to understand what it is doing, don't worry if you don't understand most things.
+
+The important step is to uncomment the following lines.
+
+```php
+// Required, updates common software
+"${distro_id}:${distro_codename}-updates";
+
+// Optional, removes unused packages when updating
+Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
+Unattended-Upgrade::Remove-Unused-Dependencies "true";
+
+// Optional, reboot automatically the system if needed at certain time
+Unattended-Upgrade::Automatic-Reboot "true";
+Unattended-Upgrade::Automatic-Reboot-Time "02:00";
+```
+
+> You can search the file with `ctrl` + `w`
+
+Then exit `nano` with `ctrl` + `x` and press `Y` to save modifications.
+
+---
+
+## Enable
+
+Now that everything is set up, lets enable the automatic updates. For this, you will need to configure one last file.
+
+```sh
+sudo nano /etc/apt/apt.conf.d/20auto-upgrades
+```
+
+The file might be empty, in that case, just paste the following.
+
+```php
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Download-Upgradeable-Packages "1";
+APT::Periodic::Unattended-Upgrade "1";
+APT::Periodic::AutocleanInterval "7";
+```
+
+The values are specified in days, so auto-clean will happen every week and auto-updates every day.
+
+---
+
+## Test
+
+Let's test if everything is set up correctly.
+
+```sh
+sudo unattended-upgrades --dry-run
+```
+
+This will run `unattended-upgrades` without making any real change, making sure everything is correctly set up.
+
+---
+
+## End
+
+That was it, easy right?
+
+### What's next?
+
+You might want to [free up space on your server](https://blog.akbal.dev/how-to-free-up-space-on-ubuntu-server) after all the updates are done!
+
+<!-- INCLUDE -->
+
+!INCLUDE "./src/blog.akbal.dev/include/self_promotion.md", 2
+
+<!-- /INCLUDE -->
+
+### Conclusion
+
+Congratulations, today you have learned how to set up and configure automatic updates on your Ubuntu server thanks to the `unattended-upgrades` package.
+
+**Let me know if the tutorial was useful to you in the comments!**
