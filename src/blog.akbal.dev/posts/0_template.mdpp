@@ -1,0 +1,46 @@
+<!--
+Title: Hooking title
+Tags: tutorial, beginners,
+-->
+
+# Introduction
+
+<!-- Hook that introduces what this article is about -->
+
+---
+
+## Before we start
+
+### Preface
+
+<!-- Information that should be known from the start -->
+
+### Requirements
+
+- Requirement
+
+---
+
+## Content 1
+
+---
+
+## End
+
+<!-- Brief comment -->
+
+### What's next?
+
+<!-- Something to do next, related to the article -->
+
+<!-- INCLUDE -->
+
+!INCLUDE "./src/blog.akbal.dev/include/self_promotion.md", 2
+
+<!-- /INCLUDE -->
+
+### Conclusion
+
+Congratulations, today you have learned <!-- How to do X thanks to Y -->
+
+**Let me know if the tutorial was useful to you in the comments!**
