@@ -1,0 +1,67 @@
+<!--
+Title: How to set up Matomo analytics in your Hashnode blog
+Tags: tutorial, beginners, hashnode, blog, matomo
+-->
+
+# Introduction
+
+Today I bring incredible news; Hashnode has finally added [support for Matomo analytics](https://hashnode.com/post/support-for-matomo-formerly-piwik-ckevg1tnn00tcn1s18ima1ihs)!
+
+> Matomo are powerful open source web analytics which gives you 100% data ownership.
+
+I just noticed it in the _integrations_ tab of Hashnode's dashboard, so...
+
+**Let's learn how to integrate Matomo in Hashnode!**
+
+---
+
+## Before we start
+
+### Requirements
+
+- A Hashnode blog
+- A Matomo server
+
+---
+
+## New Matomo website
+
+To start, you will need to go to your Matomo server and create a new website.
+
+Create it in: `All websites` > `Add a new website`.
+
+Now, fill the form with your current Hashnode details, grab the site ID, and you are ready to go!
+
+![Matomo form](https://dev-to-uploads.s3.amazonaws.com/i/qob56vcg9hgq74mx9x64.png)
+
+---
+
+## Add Matomo integration
+
+Now that you have the Matomo site set up, go to your Hashnode dashboard and choose the `integrations` tab.
+
+There you will see a form for Matomo. Just fill it with your Matomo server details.
+
+![Hashnode form](https://dev-to-uploads.s3.amazonaws.com/i/cxixcmxqqla761cmrnka.png)
+
+---
+
+## End
+
+And that was it, **100% open source analytics on your Hashnode blog in less than 5 minutes**. Easy right?
+
+### What's next?
+
+Take a look at your Matomo analytics, you should start to see people coming in to your blog to enjoy your incredible articles. 😉
+
+<!-- INCLUDE -->
+
+!INCLUDE "./src/blog.akbal.dev/include/self_promotion.md", 2
+
+<!-- /INCLUDE -->
+
+### Conclusion
+
+Congratulations, today you have set up Matomo analytics for your Hashnode blog in a breeze.
+
+**Let me know if the tutorial was useful to you in the comments!**
