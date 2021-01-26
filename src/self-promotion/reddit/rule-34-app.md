@@ -33,6 +33,8 @@ _The App is not supposed to replace the original sites! The main focus is to bro
 ### Links
 
 - [Rule 34 App Twitter](https://redirect.r34.app/twitter)
+- [Rule 34 App Twitter Bot](https://redirect.r34.app/twitter/bot)
+- [Rule 34 App Twitter FurBot](https://redirect.r34.app/twitter/furbot)
 - [Rule 34 App Discord](https://redirect.r34.app/discord)
 - [Rule 34 App GitHub](https://redirect.r34.app/github) for issues and further information.
 
