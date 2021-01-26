@@ -28,7 +28,7 @@ _This includes Android, iOS and most consoles like the PS4 And Xbox One._
 
 ### Disclaimer
 
-_The App is not supposed to replace the original sites! The main focus is to browse posts and have a good time; the app doesn’t offer upload, login or comment functionality._
+This App does not replace the original sites! The main focus is to browse posts and have a good time. _The app doesn’t offer upload, login or comment functionality because of these reasons._
 
 ### Links
 
@@ -38,4 +38,4 @@ _The App is not supposed to replace the original sites! The main focus is to bro
 - [Rule 34 App Discord](https://redirect.r34.app/discord)
 - [Rule 34 App GitHub](https://redirect.r34.app/github) for issues and further information.
 
-Feedback is appreciated! :)
+I always appreciate feedback! :)
