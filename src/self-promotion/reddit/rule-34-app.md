@@ -1,8 +1,8 @@
 # Rule 34 App
 
-> Actually a Progressive Web App (PWA).
+An App to browse the most popular [Boorus](https://en.wiktionary.org/wiki/booru) in an intuitive and easy to use interface, designed for mobile devices.
 
-With this App you can browse the most popular [Boorus](https://en.wiktionary.org/wiki/booru) in an intuitive and easy to use interface, designed for mobile devices.
+> Actually a Progressive Web App (PWA).
 
 ## Supported Boorus
 
@@ -22,7 +22,7 @@ With this App you can browse the most popular [Boorus](https://en.wiktionary.org
 ## Usage
 
 Follow the link to use it on any device that has a _modern_ browser.
-_This includes Android, iOS and some consoles like the PS4 And Xbox One._
+_This includes Android, iOS and most consoles like the PS4 And Xbox One._
 
 **[✨ https://r34.app ✨](https://r34.app/?utm_source=Reddit&utm_medium=Post)**
 
@@ -32,8 +32,8 @@ _The App is not supposed to replace the original sites! The main focus is to bro
 
 ### Links
 
-- [Rule 34 App Twitter](https://twitter.com/Rule34App)
+- [Rule 34 App Twitter](https://redirect.r34.app/twitter)
 - [Rule 34 App Discord](https://redirect.r34.app/discord)
-- [Rule 34 App GitHub repository](https://github.com/AlejandroAkbal/Rule-34-App) for issues and further information.
+- [Rule 34 App GitHub](https://redirect.r34.app/github) for issues and further information.
 
-Feedback is appreciated :)
+Feedback is appreciated! :)
