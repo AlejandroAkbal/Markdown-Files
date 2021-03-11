@@ -1,0 +1,88 @@
+<!--
+Title: Detect and update to the latest version with Nuxt PWA
+Tags: tutorial, vue, nuxt, blog
+-->
+
+# Introduction
+
+I was working on one of my Nuxt projects and noticed that some users were using old versions, which was causing some errors to pop up.
+
+I investigated and learned that sometimes PWAs don't update if the user doesn't manually refresh the website. So...
+
+**Let's learn how to automatically update to the latest PWA version.**
+
+---
+
+## Before we start
+
+This is a simple tutorial for projects with Nuxt and the PWA module, nothing else is required.
+
+### Requirements
+
+- Nuxt
+- Nuxt PWA module
+
+---
+
+## Create a new plugin
+
+To start, you will need to go to your plugins directory and create a new JavaScript file. I will name it `pwa-update.js` but feel free to use whatever you want to.
+
+```js
+// pwa-update.js
+
+export default async (context) => {
+  const workbox = await window.$workbox;
+
+  if (!workbox) {
+    console.debug("Workbox couldn't be loaded.");
+    return;
+  }
+
+  workbox.addEventListener('installed', (event) => {
+    if (!event.isUpdate) {
+      console.debug('The PWA is on the latest version.');
+      return;
+    }
+
+    console.debug('There is an update for the PWA, reloading...');
+    window.location.reload();
+  });
+};
+```
+
+---
+
+## Add the plugin to the Nuxt config
+
+Then we have to add it to the plugins array on `nuxt.config.js`.
+
+```js
+// nuxt.config.js
+
+// ...
+
+  plugins: [
+    { src: '~/plugins/pwa-update.js', mode: 'client' },
+  ],
+
+// ...
+```
+
+---
+
+## End
+
+And that was it. Easy right?
+
+<!-- INCLUDE -->
+
+!INCLUDE "./src/blog.akbal.dev/include/self_promotion.md", 2
+
+<!-- /INCLUDE -->
+
+### Conclusion
+
+Congratulations, today you have set up automatic PWA updates for your project.
+
+**Let me know if this tutorial was useful to you in the comments!**
