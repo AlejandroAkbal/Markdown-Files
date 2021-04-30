@@ -5,8 +5,6 @@ If you have found this useful, then you should follow me, I will be posting more
 - [GitHub](https://redirect.akbal.dev/github)
 - [Twitter](https://redirect.akbal.dev/twitter)
 - [Dev.to](https://redirect.akbal.dev/dev.to)
-- [Medium](https://redirect.akbal.dev/medium)
-- [LinkedIn](https://redirect.akbal.dev/linkedin)
 
 Or support me financially. 💸
 
