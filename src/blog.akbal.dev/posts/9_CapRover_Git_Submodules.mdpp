@@ -47,7 +47,7 @@ For example:
 }
 ```
 
-Then, you will need to create a `Dockerfile` that contains the following step.
+Then, you will need to create a `Dockerfile` that contains the following build step.
 
 ```dockerfile
 RUN git submodule update --init --recursive
