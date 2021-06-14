@@ -1,0 +1,141 @@
+<!--
+Title: How to deploy git submodules to CapRover
+Tags: tutorial, beginners, CapRover
+-->
+
+# Introduction
+
+In this tutorial I will explain how to get `git submodules` to deploy correctly to `CapRover` using the `CapRover CLI`.
+
+---
+
+## Before we start
+
+### Preface
+
+Having some knowledge about `CapRover`, `Docker` and `Git` will help you understand how this solution works.
+
+---
+
+## The problem
+
+When you use `caprover deploy`, what happens underneath is that the CLI uses `git archive` to make a compressed `tar` of your repository. It then sends and deploys that file to your CapRover server.
+
+But there are some problems with `git archive`:
+**It does NOT include the `.git` directory in the `tar`.**
+
+_So what you end up deploying is not really a git repository..._
+
+And if you were using `git submodules` in your repository, they are not downloaded, since the `.git` directory is missing.
+
+To solve that issue, I have found a solution that is separated into three steps.
+
+---
+
+## First step: Create a Dockerfile
+
+The first step to use `git submodules` in CapRover is to create a `Dockerfile` and download the `git submodules` as a build step.
+
+You will need to create a `captain-definition` file and point it to a `Dockerfile`.
+
+For example:
+
+```json
+{
+  "schemaVersion": 2,
+  "dockerfilePath": "./Dockerfile"
+}
+```
+
+Then, you will need to create a `Dockerfile` that contains the following step.
+
+```dockerfile
+RUN git submodule update --init --recursive
+```
+
+For example:
+
+```dockerfile
+FROM node:15-alpine
+
+COPY . .
+
+RUN apk --no-cache add git
+
+# IMPORTANT: Download git submodules
+RUN git submodule update --init --recursive
+
+# ...
+
+RUN npm ci
+
+CMD ["node", "src/main"]
+```
+
+---
+
+## Second step: Include .git directory in the tar
+
+The second step is to improve what `caprover deploy` does.
+Create a `tar` file of your repository, while adding the `.git` directory.
+
+For that, you can use the following commands:
+
+```sh
+# Archive git repository
+git archive HEAD > deploy.tar
+
+# Add `.git` directory to `tar`
+tar -rf deploy.tar .git
+```
+
+---
+
+## Third step: Deploy the tar
+
+Now that you have both the `tar` with the `.git` directory, and a `Dockerfile` that downloads the `git submodules`, you are ready to deploy.
+
+```sh
+# Deploy the `tar` to your CapRover server
+npx caprover deploy -t ./deploy.tar
+
+# Remove the tar
+rm ./deploy.tar
+```
+
+---
+
+## End
+
+That was it, I hope you had luck and your deployment was successful!
+
+Feel free to use the following script to perform all of these steps automatically.
+
+```sh
+#!/bin/bash
+
+# Archive git repository
+git archive HEAD > deploy.tar
+
+# Add `.git` directory to `tar`
+tar -rf deploy.tar .git
+
+# Deploy the `tar` to your CapRover server
+npx caprover deploy -t ./deploy.tar
+
+# Remove the tar
+rm ./deploy.tar
+
+```
+
+<!-- INCLUDE -->
+
+!INCLUDE "./src/blog.akbal.dev/include/self_promotion.md", 2
+
+<!-- /INCLUDE -->
+
+### Conclusion
+
+Congratulations, today you have learned how to deploy `git submodules` to your `CapRover` server.
+
+**Let me know if the tutorial was useful to you in the comments!**
